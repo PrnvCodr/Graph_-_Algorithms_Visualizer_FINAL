@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Algorithms Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header glass-panel">
+            <h1 class="app-title">
+                <span class="gradient-text">Graph Algorithms Visualizer</span>
+            </h1>
+            <button class="btn theme-toggle" id="themeToggle">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar glass-panel">
+                <div class="sidebar-section">
+                    <h3>Graph Creation</h3>
+                    <div class="button-group">
+                        <button class="btn btn--primary" id="addNodeBtn">
+                            <span class="btn-icon">➕</span>
+                            Add Node
+                        </button>
+                        <button class="btn btn--primary" id="addEdgeBtn">
+                            <span class="btn-icon">🔗</span>
+                            Add Edge
+                        </button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Graph Type</label>
+                        <select class="form-control" id="graphType">
+                            <option value="undirected">Undirected</option>
+                            <option value="directed">Directed</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            <input type="checkbox" id="weightedGraph"> Weighted Graph
+                        </label>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Manual Input</h3>
+                    <div class="form-group">
+                        <label class="form-label">Add Node</label>
+                        <input type="text" class="form-control" id="nodeNameInput" placeholder="Node name">
+                        <button class="btn btn--secondary btn--sm" id="addNodeManual">Add</button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Add Edge</label>
+                        <div class="flex gap-8">
+                            <input type="text" class="form-control" id="fromNodeInput" placeholder="From">
+                            <input type="text" class="form-control" id="toNodeInput" placeholder="To">
+                        </div>
+                        <input type="number" class="form-control" id="edgeWeightInput" placeholder="Weight (optional)" min="1">
+                        <button class="btn btn--secondary btn--sm" id="addEdgeManual">Add Edge</button>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Algorithm</h3>
+                    <div class="form-group">
+                        <label class="form-label">Select Algorithm</label>
+                        <select class="form-control" id="algorithmSelect">
+                            <option value="">Choose Algorithm</option>
+                            <option value="BFS">Breadth-First Search</option>
+                            <option value="DFS">Depth-First Search</option>
+                            <option value="Dijkstra">Dijkstra's Algorithm</option>
+                            <option value="Kruskal">Kruskal's MST</option>
+                            <option value="Prim">Prim's MST</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Start Node</label>
+                        <select class="form-control" id="startNodeSelect">
+                            <option value="">Select start node</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn btn--primary btn--full-width" id="runAlgorithmBtn">
+                        <span class="btn-icon">▶️</span>
+                        Run Algorithm
+                    </button>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Controls</h3>
+                    <div class="button-group">
+                        <button class="btn btn--secondary" id="playPauseBtn">
+                            <span class="btn-icon">⏸️</span>
+                        </button>
+                        <button class="btn btn--secondary" id="stepBtn">
+                            <span class="btn-icon">⏭️</span>
+                        </button>
+                        <button class="btn btn--secondary" id="resetBtn">
+                            <span class="btn-icon">🔄</span>
+                        </button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Speed: <span id="speedLabel">500ms</span></label>
+                        <input type="range" class="speed-slider" id="speedSlider" min="100" max="2000" value="500" step="100">
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Actions</h3>
+                    <button class="btn btn--outline btn--full-width" id="clearGraphBtn">Clear Graph</button>
+                </div>
+            </aside>
+
+            <!-- Canvas Container -->
+            <div class="canvas-container">
+                <canvas id="graphCanvas" class="graph-canvas"></canvas>
+                <div class="canvas-overlay" id="canvasOverlay"></div>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <footer class="status-bar glass-panel">
+            <div class="status-info">
+                <span class="status-item">Nodes: <span id="nodeCount">0</span></span>
+                <span class="status-item">Edges: <span id="edgeCount">0</span></span>
+                <span class="status-item">Mode: <span id="currentMode">Normal</span></span>
+            </div>
+            <div class="algorithm-status" id="algorithmStatus">
+                Ready to visualize algorithms
+            </div>
+        </footer>
+
+        <!-- Context Menu -->
+        <div class="context-menu glass-panel" id="contextMenu">
+            <div class="context-menu-item" id="contextAddNode">Add Node</div>
+            <div class="context-menu-item" id="contextConnectNode">Connect to...</div>
+            <div class="context-menu-item" id="contextRenameNode">Rename</div>
+            <div class="context-menu-item" id="contextDeleteNode">Delete</div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
